@@ -1,0 +1,1 @@
+//copyright see https://github.com/bulletphysics/bullet3
