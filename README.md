@@ -18,5 +18,5 @@ Usage: 1.ChromeUtilsStartTimings();
 
 
 
-Open Chrome press F12,select the Performance tab and drag timings.txt into the center emplace.
+Open Chrome press F12,select the Performance tab and drag timings_0.json into the center emplace.
 
