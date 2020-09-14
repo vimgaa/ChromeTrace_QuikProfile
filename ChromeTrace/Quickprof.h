@@ -27,7 +27,7 @@ void SetCustomLeaveProfileZoneFunc(LeaveProfileZoneFunc* leaveFunc);
 #ifndef BT_NO_PROFILE
 //btQuickprofGetCurrentThreadIndex will return -1 if thread index cannot be determined, 
 //otherwise returns thread index in range [0..maxThreads]
-unsigned int btQuickprofGetCurrentThreadIndex2();
+unsigned int QuickprofGetCurrentThreadIndex();
 const unsigned int QUICKPROF_MAX_THREAD_COUNT = 64;
 
 #include <stdio.h>//@todo remove this, backwards compatibility
@@ -139,14 +139,14 @@ private:
 
 ///ProfileSampleClass is a simple way to profile a function's scope
 ///Use the BT_PROFILE macro at the start of scope to time
-class	CProfileSample {
+class	ProfileSample {
 public:
-	CProfileSample(const char * name);
+	ProfileSample(const char * name);
 
-	~CProfileSample(void);
+	~ProfileSample(void);
 };
 
-#define	PROFILE( name )			CProfileSample __profile( name )
+#define	PROFILE( name )			ProfileSample __profile( name )
 
 #endif //QUICK_PROF_H
 

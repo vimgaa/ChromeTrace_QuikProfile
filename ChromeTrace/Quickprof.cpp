@@ -245,7 +245,7 @@ unsigned long int			CProfileManager::ResetTime = 0;
 CProfileIterator *	CProfileManager::Get_Iterator(void)
 {
 
-	int threadIndex = btQuickprofGetCurrentThreadIndex2();
+	int threadIndex = QuickprofGetCurrentThreadIndex();
 	if ((threadIndex<0) || threadIndex >= QUICKPROF_MAX_THREAD_COUNT)
 		return 0;
 
@@ -276,7 +276,7 @@ void						CProfileManager::CleanupMemory(void)
 *=============================================================================================*/
 void	CProfileManager::Start_Profile(const char * name)
 {
-	int threadIndex = btQuickprofGetCurrentThreadIndex2();
+	int threadIndex = QuickprofGetCurrentThreadIndex();
 	if ((threadIndex<0) || threadIndex >= QUICKPROF_MAX_THREAD_COUNT)
 		return;
 
@@ -293,7 +293,7 @@ void	CProfileManager::Start_Profile(const char * name)
 *=============================================================================================*/
 void	CProfileManager::Stop_Profile(void)
 {
-	int threadIndex = btQuickprofGetCurrentThreadIndex2();
+	int threadIndex = QuickprofGetCurrentThreadIndex();
 	if ((threadIndex<0) || threadIndex >= QUICKPROF_MAX_THREAD_COUNT)
 		return;
 
@@ -312,7 +312,7 @@ void	CProfileManager::Stop_Profile(void)
 void	CProfileManager::Reset(void)
 {
 	gProfileClock.reset();
-	int threadIndex = btQuickprofGetCurrentThreadIndex2();
+	int threadIndex = QuickprofGetCurrentThreadIndex();
 	if ((threadIndex<0) || threadIndex >= QUICKPROF_MAX_THREAD_COUNT)
 		return;
 	gRoots[threadIndex].Reset();
@@ -400,7 +400,7 @@ void	CProfileManager::dumpAll()
 
 	CProfileManager::Release_Iterator(profileIterator);
 }
-unsigned int btQuickprofGetCurrentThreadIndex2()
+unsigned int QuickprofGetCurrentThreadIndex()
 {
 #if BT_THREADSAFE
 	return btGetCurrentThreadIndex();
@@ -489,12 +489,12 @@ void SetCustomLeaveProfileZoneFunc(LeaveProfileZoneFunc* leaveFunc)
 	s_leaveFunc = leaveFunc;
 }
 
-CProfileSample::CProfileSample(const char * name)
+ProfileSample::ProfileSample(const char * name)
 {
 	EnterProfileZone(name);
 }
 
-CProfileSample::~CProfileSample(void)
+ProfileSample::~ProfileSample(void)
 {
 	LeaveProfileZone();
 }
